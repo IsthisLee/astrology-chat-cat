@@ -13,3 +13,7 @@
 - OpenAI API
 - CloudFlare
 - AWS Lambda
+
+- 광고
+  - Kakao AdFit
+  - Toss Id
