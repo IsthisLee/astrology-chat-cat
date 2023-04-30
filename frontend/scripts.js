@@ -6,6 +6,12 @@ const userInfo = {
   bornHour: null
 };
 
+function afterGetChat() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("inputText").style.display = "block";
+  document.getElementById("inputText").focus();
+}
+
 async function sendMessage() {
   const inputText = document.getElementById("inputText");
   const messageText = inputText.value.trim();
@@ -39,14 +45,17 @@ async function sendMessage() {
 
     if (response.success) {
       addChatMessage("assistant-message", response.data.assistant);
-      document.getElementById("loader").style.display = "none";
-      document.getElementById("inputText").style.display = "block";
-      document.getElementById("inputText").focus();
+      afterGetChat();
 
       // Memory에 챗냐옹 대화 내역 저장
       assistantMessages.push(response.data.assistant);
     } else {
-      addChatMessage("assistant-message", "운세 요청에 실패하였습니다.");
+      addChatMessage(
+        "assistant-message",
+        `운세 요청에 실패하였습니다. ${response.message}`
+      );
+      afterGetChat();
+
       userMessages.pop(); // 챗냐옹 응답 실패 시 마지막 유저 대화 내역 삭제
     }
   } catch (error) {
