@@ -38,6 +38,7 @@ async function sendMessage() {
       addChatMessage("assistant-message", response.data.assistant);
       document.getElementById("loader").style.display = "none";
       document.getElementById("inputText").style.display = "block";
+      document.getElementById("inputText").focus();
 
       // Memory에 챗냐옹 대화 내역 저장
       assistantMessages.push(response.data.assistant);
@@ -83,14 +84,19 @@ function start() {
   userInfo.bornHour = parseNull(userInfo.bornHour);
 
   if (userInfo.bornDate.length === 0) {
-    alert("생년월일을 입력해주세요.");
+    swal({
+      title: "Meow!",
+      text: "생년월일을 입력해주라냐옹",
+      icon: "error",
+      button: "냐옹"
+    });
     return;
   }
 
   document.querySelector(".intro-container").style.display = "none";
   document.querySelector(".chat-wrapper").style.display = "block";
-  document.getElementById("inputText").value = "오늘 운세 알려줘";
-  document.getElementById("inputText").focus();
+  document.getElementById("chat-top-img").style.display = "block";
+  document.getElementById("inputText").value = "오늘 운세 알려줘라냐옹";
 }
 
 const selectBox = document.getElementById("bornHour");
@@ -102,7 +108,7 @@ for (let i = -1; i <= 23; i++) {
 
   if (i === -1) {
     option.value = null;
-    option.text = "모르겠어요";
+    option.text = "모르겠다냐옹";
   }
 
   selectBox.appendChild(option);
@@ -117,5 +123,5 @@ document.getElementById("inputText").addEventListener("keypress", (event) => {
 
 addChatMessage(
   "assistant-message",
-  "안녕, 나는 운세보는 냐옹이. 궁금한 것을 물어보라냐옹! (ex. 오늘 운세 알려줘)"
+  "냐옹, 나는 운세보는 냐옹이다냐옹. 궁금한 것을 물어보라냐옹! (ex. 오늘 운세 알려줘라냐옹)"
 );
