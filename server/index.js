@@ -2,16 +2,17 @@ import express from "express";
 import * as dotenv from "dotenv";
 import cors from "cors";
 import { Configuration, OpenAIApi } from "openai";
+import serverless from "serverless-http";
 
 dotenv.config();
 const app = express();
 
 // CORS 이슈 해결
-// let corsOptions = {
-//   origin: "https://www.domain.com",
-//   credentials: true
-// };
-app.use(cors());
+const corsOptions = {
+  origin: "https://astrology-cat.pages.dev",
+  credentials: true
+};
+app.use(cors(corsOptions));
 
 // POST 요청 받기 위한 코드
 app.use(express.json()); // for parsing application/json
@@ -93,6 +94,9 @@ app.post("/fortuneTell", async function (req, res, next) {
   });
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`server is running on port ${process.env.PORT}`);
-});
+const handler = serverless(app);
+export { handler };
+
+// app.listen(process.env.PORT, () => {
+//   console.log(`server is running on port ${process.env.PORT}`);
+// });

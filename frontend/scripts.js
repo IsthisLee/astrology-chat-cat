@@ -22,17 +22,20 @@ async function sendMessage() {
   document.getElementById("inputText").style.display = "none";
 
   try {
-    const response = await fetch("http://localhost:8080/fortuneTell", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        userInfo,
-        userMessages,
-        assistantMessages
-      })
-    }).then((res) => res.json());
+    const response = await fetch(
+      "https://wec3lbcetgayya5zrr7bftelni0fjxwy.lambda-url.ap-northeast-2.on.aws/fortuneTell",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          userInfo,
+          userMessages,
+          assistantMessages
+        })
+      }
+    ).then((res) => res.json());
 
     if (response.success) {
       addChatMessage("assistant-message", response.data.assistant);
