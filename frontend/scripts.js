@@ -57,6 +57,8 @@ async function sendMessage() {
     }
   } catch (error) {
     addAssistantMessage("네트워크 오류");
+    afterGetChat();
+
     userMessages.pop(); // 챗냐옹 응답 실패 시 마지막 유저 대화 내역 삭제
   }
 }
