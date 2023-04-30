@@ -10,13 +10,24 @@
 </head>
 
 <body>
-  <div class="chat-wrapper">
+  <div class="intro-container">
+    <h1>운세를 알려주겠다냐옹</h1>
+    <img src="images/s2.webp" alt="">
+    <label for="born-date">이름</label>
+    <input id="name" type="text">
+    <label for="born-date">생년월일(필수)</label>
+    <input id="born-date" type="date">
+    <label for="born-hour">태어난 시간</label>
+    <select id="born-hour"></select>
+    <button onclick="start()">시작하기</button>
+  </div>
+  <div class="chat-wrapper" style="display: none;"">
     <h1>운세보는 챗냐옹</h1>
-    <div class="chat-container" id="chatContainer"></div>
-    <div class="input-container">
-      <input type="text" id="inputText" placeholder="Type your message...">
-      <button onclick="sendMessage()">전송</button>
-    </div>
+    <div class=" chat-container" id="chatContainer"></div>
+  <div class="input-container">
+    <input type="text" id="inputText" placeholder="궁금한 것을 물어보세요">
+    <button onclick="sendMessage()">전송</button>
+  </div>
   </div>
   <script src="scripts.js"></script>
 </body>

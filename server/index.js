@@ -24,7 +24,9 @@ const openai = new OpenAIApi(configuration);
 
 // POST method route
 app.post("/fortuneTell", async function (req, res, next) {
-  const { userMessages, assistantMessages } = req.body;
+  const { userInfo, userMessages, assistantMessages } = req.body;
+
+  const koNow = new Date().toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });
 
   const messages = [
     {
@@ -41,6 +43,24 @@ app.post("/fortuneTell", async function (req, res, next) {
       role: "assistant",
       content:
         "안녕하세요, 저는 챗냐옹입니다. 어떤 운세에 대해 궁금하신가요? 제가 도와드릴게요."
+    },
+    {
+      role: "user",
+      content: `저의 생년월일은 ${userInfo.bornDate}입니다.${
+        userInfo.bornHour ? ` 태어난 시간은 ${userInfo.bornHour}시입니다.` : ""
+      }${userInfo.name ? ` 내 이름은 ${userInfo.name}입니다.` : ""}`
+    },
+    {
+      role: "assistant",
+      content: `당신의 생년월일은 ${userInfo.bornDate}인 것을 확인했습니다.${
+        userInfo.bornHour
+          ? ` 당신의 태어난 시간은 ${userInfo.bornHour}시인 것을 확인했습니다.`
+          : ""
+      }${
+        userInfo.name
+          ? ` 당신의 이름은 ${userInfo.name}인 것을 확인했습니다.`
+          : ""
+      } 현재 날짜랑 시간은 ${koNow}입니다.`
     }
   ];
 
@@ -56,14 +76,12 @@ app.post("/fortuneTell", async function (req, res, next) {
         content: String(assistantMessages.shift()).replace(/\n/g, "")
       });
   }
-  console.log(messages);
 
   const completion = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
     messages
   });
   const fortune = completion.data.choices[0].message["content"];
-  console.log(fortune);
 
   res.json({
     success: true,
