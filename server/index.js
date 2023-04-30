@@ -23,7 +23,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 // POST method route
-app.get("/fortuneTell", async function (req, res, next) {
+app.post("/fortuneTell", async function (req, res, next) {
   const completion = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
     messages: [
@@ -48,7 +48,12 @@ app.get("/fortuneTell", async function (req, res, next) {
   const fortune = completion.data.choices[0].message["content"];
   console.log(fortune);
 
-  res.send(fortune);
+  res.json({
+    success: true,
+    data: {
+      assistant: fortune
+    }
+  });
 });
 
 app.listen(process.env.PORT, () => {
