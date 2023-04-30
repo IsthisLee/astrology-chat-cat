@@ -5,39 +5,20 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>운세보는 챗도지</title>
+  <title>운세보는 챗루피</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <h1></h1>
-  <button onclick="getFortune()">운세보기</button>
-
-  <script>
-    async function getFortune() {
-      try {
-        const response = await fetch('http://localhost:8080/fortuneTell', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ name: 'Geon' })
-        })
-          .then(res => res.json())
-          .catch(err => console.log(err));
-
-        if (response.success) {
-          console.log(response);
-          console.log(response.data.assistant);
-          return response.assistant;
-        } else {
-          console.error('운세 보기에 실패하였습니다');
-        }
-      } catch (error) {
-        console.error('네트워크 오류:', error);
-      }
-    }
-  </script>
-
+  <div class="chat-wrapper">
+    <h1>운세보는 챗루피</h1>
+    <div class="chat-container" id="chatContainer"></div>
+    <div class="input-container">
+      <input type="text" id="inputText" placeholder="Type your message...">
+      <button onclick="sendMessage()">전송</button>
+    </div>
+  </div>
+  <script src="scripts.js"></script>
 </body>
 
 </html>
