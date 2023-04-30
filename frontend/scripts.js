@@ -73,10 +73,10 @@ function addAssistantMessage(text) {
   if (assistantMessages.length >= 1) {
     const p = document.createElement("p");
     p.innerHTML =
-      "그리고 참치캔 값을 내놓으면 더욱 좋은 운이 찾아올 것이다냐옹 => ";
+      "그리고 참치캔 값을 내놓으면 더욱 좋은 운이 찾아올 것이다냐옹~! => ";
     const link = document.createElement("a");
     link.href = "https://toss.me/comecome";
-    link.innerHTML = "참치캔 값 내놓기";
+    link.innerHTML = "참치캔 값 내놓기 🐟🥫";
     p.appendChild(link);
     messageContent.appendChild(p);
   }
