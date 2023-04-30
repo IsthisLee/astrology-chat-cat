@@ -3,6 +3,7 @@ import * as dotenv from "dotenv";
 import cors from "cors";
 import { Configuration, OpenAIApi } from "openai";
 import serverless from "serverless-http";
+import apiLimiter from "./utils/rateLimit.js";
 
 dotenv.config();
 const app = express();
@@ -24,7 +25,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 // POST method route
-app.post("/fortuneTell", async function (req, res, next) {
+app.post("/fortuneTell", apiLimiter, async (req, res, next) => {
   const { userInfo, userMessages, assistantMessages } = req.body;
 
   const koNow = new Date().toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });

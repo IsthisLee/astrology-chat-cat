@@ -52,7 +52,7 @@ async function sendMessage() {
     } else {
       addChatMessage(
         "assistant-message",
-        `운세 요청에 실패하였습니다. ${response.message}`
+        `운세 요청에 실패했다냐옹. ${response.message}`
       );
       afterGetChat();
 
