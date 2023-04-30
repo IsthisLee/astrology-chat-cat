@@ -15,7 +15,6 @@ body {
 }
 
 .chat-wrapper {
-  position: relative;
   width: 100%;
   max-width: 600px;
   background-color: rgba(0, 0, 0, 0.6);
@@ -25,11 +24,14 @@ body {
 }
 
 #chat-top-img {
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-  opacity: 0.3;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0.2;
 }
 
 h1 {
@@ -116,11 +118,12 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 1rem;
   color: white;
 }
 
 .intro-container img {
-  width: 50%;
+  width: 40%;
   min-width: 300px;
   border-radius: 10px;
   margin-bottom: 1rem;
@@ -139,7 +142,7 @@ button {
 }
 
 .intro-container select {
-  width: 20%;
+  width: 100%;
   max-width: 300px;
   padding: 10px;
   border: 2px solid #444;
@@ -163,4 +166,13 @@ button {
   align-items: center;
   font-size: 2rem;
   color: white;
+}
+
+.kakao-ad {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  min-width: 320px;
+  min-height: 100px;
 }
