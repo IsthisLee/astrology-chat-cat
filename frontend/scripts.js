@@ -67,5 +67,5 @@ document.getElementById("inputText").addEventListener("keypress", (event) => {
 
 addChatMessage(
   "assistant-message",
-  "안녕, 나는 운세보는 루피. 이름을 입력해줘"
+  "안녕, 나는 운세보는 냐옹이. 이름을 입력해줘"
 );
