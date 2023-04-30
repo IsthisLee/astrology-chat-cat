@@ -32,12 +32,19 @@ h1 {
 }
 
 .chat-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   overflow-y: auto;
-  max-height: 400px;
+  height: 400px;
   padding: 10px;
   border: 2px solid #444;
   border-radius: 10px;
   background-color: rgba(30, 30, 30, 0.8);
+}
+
+.chat-text-container {
+  overflow-y: auto;
 }
 
 .message {
@@ -136,4 +143,12 @@ button {
 
 .intro-container button {
   background-color: #000000;
+}
+
+.loader {
+  margin: auto;
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  color: white;
 }

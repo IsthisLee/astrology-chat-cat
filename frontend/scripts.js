@@ -18,6 +18,9 @@ async function sendMessage() {
 
   inputText.value = "";
 
+  document.getElementById("loader").style.display = "block";
+  document.getElementById("inputText").style.display = "none";
+
   try {
     const response = await fetch("http://localhost:8080/fortuneTell", {
       method: "POST",
@@ -33,21 +36,23 @@ async function sendMessage() {
 
     if (response.success) {
       addChatMessage("assistant-message", response.data.assistant);
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("inputText").style.display = "block";
 
-      // Memory에 챗루피 대화 내역 저장
+      // Memory에 챗냐옹 대화 내역 저장
       assistantMessages.push(response.data.assistant);
     } else {
       addChatMessage("assistant-message", "운세 요청에 실패하였습니다.");
-      userMessages.pop(); // 챗루피 응답 실패 시 마지막 유저 대화 내역 삭제
+      userMessages.pop(); // 챗냐옹 응답 실패 시 마지막 유저 대화 내역 삭제
     }
   } catch (error) {
     addChatMessage("assistant-message", "네트워크 오류");
-    userMessages.pop(); // 챗루피 응답 실패 시 마지막 유저 대화 내역 삭제
+    userMessages.pop(); // 챗냐옹 응답 실패 시 마지막 유저 대화 내역 삭제
   }
 }
 
 function addChatMessage(className, text) {
-  const chatContainer = document.getElementById("chatContainer");
+  const chatTextContainer = document.getElementById("chatTextContainer");
   const newMessage = document.createElement("div");
   newMessage.className = `message ${className}`;
 
@@ -60,8 +65,8 @@ function addChatMessage(className, text) {
   messageTail.className = "message-tail";
   newMessage.appendChild(messageTail);
 
-  chatContainer.appendChild(newMessage);
-  chatContainer.scrollTop = chatContainer.scrollHeight;
+  chatTextContainer.appendChild(newMessage);
+  chatTextContainer.scrollTop = chatTextContainer.scrollHeight;
 }
 
 const parseNull = (value) => {
@@ -72,8 +77,8 @@ const parseNull = (value) => {
 
 function start() {
   userInfo.name = document.getElementById("name").value.trim();
-  userInfo.bornDate = document.getElementById("born-date").value.trim();
-  userInfo.bornHour = document.getElementById("born-hour").value.trim();
+  userInfo.bornDate = document.getElementById("bornDate").value.trim();
+  userInfo.bornHour = document.getElementById("bornHour").value.trim();
 
   userInfo.bornHour = parseNull(userInfo.bornHour);
 
@@ -88,7 +93,7 @@ function start() {
   document.getElementById("inputText").focus();
 }
 
-const selectBox = document.getElementById("born-hour");
+const selectBox = document.getElementById("bornHour");
 
 for (let i = -1; i <= 23; i++) {
   let option = document.createElement("option");
